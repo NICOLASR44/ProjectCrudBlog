@@ -159,13 +159,24 @@ function ManageArticle() {
         <button type="submit">{id ? "Save" : "Create"}</button>
 
         {id && (
-          <button
-            type="button"
-            onClick={handleDelete}
-            className="delete-button"
-          >
-            Delete
-          </button>
+          <>
+            <button
+              type="button"
+              onClick={handleDelete}
+              className="delete-button"
+            >
+              Delete
+            </button>
+
+            {/* Bouton pour voir l'article */}
+            <button
+              type="button"
+              onClick={() => navigate(`/article/${id}`)} // Redirige vers la page de visualisation
+              className="view-article-button"
+            >
+              See on the website
+            </button>
+          </>
         )}
       </form>
       <div className="managearticle__footer">

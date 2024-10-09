@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
 import ManageArticle from "./pages/ManageArticle";
 import RedirectAfterCreation from "./components/RedirectAfterCreation";
+import ViewArticle from "./pages/ViewArticle";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "/redirect",
     element: <RedirectAfterCreation />,
+  },
+  {
+    path: "/article/:id",
+    element: <ViewArticle />,
   },
 ]);
 
