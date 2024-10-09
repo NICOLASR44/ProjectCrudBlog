@@ -4,20 +4,19 @@ import Navbar from "./Navbar";
 import "./styles/ManageArticle.css";
 
 function ManageArticle() {
-  const { id } = useParams(); // Récupère l'ID de l'article depuis l'URL
+  const { id } = useParams();
   const [article, setArticle] = useState({
     title: "",
     content: "",
     author: "",
     imageUrl: "",
     createdAt: "",
-    updatedAt: "",
+    updatedAt: "", // Ajout de updatedAt
   });
 
-  const [imageFile, setImageFile] = useState(null); // Gérer le fichier d'image
+  const [imageFile, setImageFile] = useState(null);
 
   useEffect(() => {
-    // Fetch les détails de l'article en utilisant l'ID
     fetch(`http://localhost:3310/api/blog/${id}`)
       .then((response) => response.json())
       .then((data) => setArticle(data))
@@ -42,11 +41,43 @@ function ManageArticle() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Code pour soumettre le formulaire (ajout/mise à jour de l'article)
-    console.log("Submitted article:", article);
+
+    const updatedArticle = {
+      title: article.title,
+      content: article.content,
+      author: article.author,
+      imageUrl: article.imageUrl,
+    };
+
     if (imageFile) {
-      // Code pour uploader le fichier image
-      console.log("Image file to upload:", imageFile);
+      const formData = new FormData();
+      formData.append("title", article.title);
+      formData.append("content", article.content);
+      formData.append("author", article.author);
+      formData.append("imageFile", imageFile);
+
+      fetch(`http://localhost:3310/api/blog/${id}`, {
+        method: "PUT",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Article updated with image:", data);
+        })
+        .catch((error) => console.error("Error updating article:", error));
+    } else {
+      fetch(`http://localhost:3310/api/blog/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedArticle),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Article updated:", data);
+        })
+        .catch((error) => console.error("Error updating article:", error));
     }
   };
 
@@ -94,8 +125,7 @@ function ManageArticle() {
             onChange={handleImageChange}
           />
         </div>
-        {/* Aperçu de l'image */}
-        {(article.imageUrl || imageFile) && (
+        {article.imageUrl && (
           <div>
             <img
               src={article.imageUrl}
@@ -113,7 +143,6 @@ function ManageArticle() {
             onChange={handleChange}
           />
         </div>
-        {/* Affichage des dates */}
         <div>
           <label htmlFor="createdAt">Created At:</label>
           <input

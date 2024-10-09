@@ -5,3 +5,30 @@
   gap: 20px;
   padding: 20px;
 }
+.article-card img {
+  width: 100%;
+  height: auto; /* Maintient les proportions de l'image */
+  object-fit: cover; /* Assure que l'image s'ajuste bien au conteneur */
+  border-radius: 10px; /* Optionnel : ajouter un arrondi pour l'image */
+}
+.article-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 300px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.article-card h2 {
+  font-size: 1.5rem;
+  margin: 10px;
+}
+
+.article-card img {
+  max-width: 80%;
+  height: auto;
+}
