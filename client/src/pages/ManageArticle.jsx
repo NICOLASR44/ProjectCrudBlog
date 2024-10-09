@@ -1,26 +1,31 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import Navbar from "./Navbar";
+import { useParams, useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 import "./styles/ManageArticle.css";
+import Footer from "../components/Footer";
 
 function ManageArticle() {
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const [article, setArticle] = useState({
     title: "",
     content: "",
     author: "",
     imageUrl: "",
     createdAt: "",
-    updatedAt: "", // Ajout de updatedAt
+    updatedAt: "",
   });
 
   const [imageFile, setImageFile] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3310/api/blog/${id}`)
-      .then((response) => response.json())
-      .then((data) => setArticle(data))
-      .catch((error) => console.error("Error fetching article:", error));
+    if (id) {
+      fetch(`http://localhost:3310/api/blog/${id}`)
+        .then((response) => response.json())
+        .then((data) => setArticle(data))
+        .catch((error) => console.error("Error fetching article:", error));
+    }
   }, [id]);
 
   const handleChange = (e) => {
@@ -42,42 +47,49 @@ function ManageArticle() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const updatedArticle = {
-      title: article.title,
-      content: article.content,
-      author: article.author,
-      imageUrl: article.imageUrl,
-    };
-
+    const formData = new FormData();
+    formData.append("title", article.title);
+    formData.append("content", article.content);
+    formData.append("author", article.author);
     if (imageFile) {
-      const formData = new FormData();
-      formData.append("title", article.title);
-      formData.append("content", article.content);
-      formData.append("author", article.author);
       formData.append("imageFile", imageFile);
+    }
 
-      fetch(`http://localhost:3310/api/blog/${id}`, {
-        method: "PUT",
-        body: formData,
+    const method = id ? "PUT" : "POST";
+    const url = id
+      ? `http://localhost:3310/api/blog/${id}`
+      : "http://localhost:3310/api/blog";
+
+    fetch(url, {
+      method,
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(id ? "Article updated:" : "Article created:", data);
+        navigate("/redirect", {
+          state: { action: id ? "updated" : "created" }, // Passer l'état
+        });
       })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Article updated with image:", data);
-        })
-        .catch((error) => console.error("Error updating article:", error));
-    } else {
+      .catch((error) => console.error("Error saving article:", error));
+  };
+
+  const handleDelete = () => {
+    if (window.confirm("Are you sure you want to delete this article?")) {
       fetch(`http://localhost:3310/api/blog/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedArticle),
+        method: "DELETE",
       })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Article updated:", data);
+        .then((response) => {
+          if (response.ok) {
+            console.log("Article deleted");
+            navigate("/redirect", {
+              state: { action: "deleted" }, // Passer l'état
+            });
+          } else {
+            console.error("Error deleting article");
+          }
         })
-        .catch((error) => console.error("Error updating article:", error));
+        .catch((error) => console.error("Error deleting article:", error));
     }
   };
 
@@ -143,28 +155,22 @@ function ManageArticle() {
             onChange={handleChange}
           />
         </div>
-        <div>
-          <label htmlFor="createdAt">Created At:</label>
-          <input
-            type="text"
-            id="createdAt"
-            name="createdAt"
-            value={new Date(article.createdAt).toLocaleString()}
-            readOnly
-          />
-        </div>
-        <div>
-          <label htmlFor="updatedAt">Updated At:</label>
-          <input
-            type="text"
-            id="updatedAt"
-            name="updatedAt"
-            value={new Date(article.updatedAt).toLocaleString()}
-            readOnly
-          />
-        </div>
-        <button type="submit">Save</button>
+
+        <button type="submit">{id ? "Save" : "Create"}</button>
+
+        {id && (
+          <button
+            type="button"
+            onClick={handleDelete}
+            className="delete-button"
+          >
+            Delete
+          </button>
+        )}
       </form>
+      <div className="managearticle__footer">
+        <Footer />
+      </div>
     </>
   );
 }

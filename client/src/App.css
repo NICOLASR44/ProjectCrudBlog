@@ -143,4 +143,5 @@ body {
   color: var(--clr-black);
   background-color: var(--clr-white);
   overflow-x: hidden;
+  background-color: var(--clr-black);
 }

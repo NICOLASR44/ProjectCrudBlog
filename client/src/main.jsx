@@ -5,7 +5,8 @@ import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Home from "./pages/Home";
-import ManageArticle from "./components/ManageArticle";
+import ManageArticle from "./pages/ManageArticle";
+import RedirectAfterCreation from "./components/RedirectAfterCreation";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,14 @@ const router = createBrowserRouter([
   {
     path: "/manage-article/:id",
     element: <ManageArticle />,
+  },
+  {
+    path: "/manage-article",
+    element: <ManageArticle />,
+  },
+  {
+    path: "/redirect",
+    element: <RedirectAfterCreation />,
   },
 ]);
 

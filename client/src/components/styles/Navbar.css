@@ -8,22 +8,70 @@
   background-color: var(--clr-black);
   font-family: var(--font-header);
   font-size: 3rem;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; /* Espacement entre Home, le centre et Return */
+  align-items: center; /* Centre verticalement les éléments */
+}
+
+.navbar__logo-home {
+  margin-left: 2rem;
+}
+
+.navbar__logo-home,
+.navbar__logo-return {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.navbar__center {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center; /* Centre le logo et les items ensemble */
+  flex-grow: 1; /* Utilise l'espace disponible au centre */
+}
+
+.navbar__Logo {
+  display: flex;
+  justify-content: center;
   align-items: center;
+  margin-right: 1rem; /* Espacement entre le logo et les items */
+}
 
-  .navbar__Logo {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    color: var(--clr-orange);
-  }
+.navbar__Items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .navbar__Items {
-    .navbar__List {
-      display: flex;
-      flex-direction: row;
-    }
-  }
+.navbar__logo-return {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  margin-right: 3rem;
+}
+
+.navbar__logo-home img,
+.navbar__logo-return img {
+  cursor: pointer; /* Change le curseur en pointer */
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease; /* Animation fluide sur transform et box-shadow */
+}
+
+.navbar__logo-home img:hover,
+.navbar__logo-return img:hover {
+  transform: scale(1.2); /* Agrandir légèrement l'image au survol */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Ajoute une ombre subtile autour de l'image */
+}
+
+.navbar__logo-home img:active,
+.navbar__logo-return img:active {
+  transform: scale(
+    1.1
+  ); /* Réduit légèrement la taille lors du clic pour simuler un appui */
 }

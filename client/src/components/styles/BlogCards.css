@@ -32,3 +32,34 @@
   max-width: 80%;
   height: auto;
 }
+
+.add-article-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 200px;
+  border: 2px dashed #ddd;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.add-article-card:hover {
+  border-color: #aaa;
+}
+
+.add-article-card__content {
+  text-align: center;
+}
+
+.add-article-card__icon {
+  font-size: 5rem;
+  color: var(--clr-orange);
+}
+
+.add-article-card__title {
+  margin-top: 10px;
+  font-size: 2rem;
+  color: var(--clr-orange);
+}
