@@ -1,14 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "./App.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import App from "./App";
+import Home from "./pages/Home";
+import ManageArticle from "./components/ManageArticle";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Home />,
+  },
+  {
+    path: "/manage-article/:id",
+    element: <ManageArticle />,
   },
 ]);
 

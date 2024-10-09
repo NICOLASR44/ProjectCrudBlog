@@ -1,0 +1,29 @@
+.navbar {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+
+  color: var(--clr-orange);
+  background-color: var(--clr-black);
+  font-family: var(--font-header);
+  font-size: 3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  .navbar__Logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--clr-orange);
+  }
+
+  .navbar__Items {
+    .navbar__List {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+}

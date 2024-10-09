@@ -1,0 +1,12 @@
+.generic-title {
+  font-size: 4rem;
+
+  .generic-title--bold {
+    font-weight: bold;
+  }
+
+  .generic-title--italic {
+    font-style: italic;
+    font-family: var(--font-header);
+  }
+}
