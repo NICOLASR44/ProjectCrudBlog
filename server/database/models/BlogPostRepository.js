@@ -2,19 +2,16 @@ const AbstractRepository = require("./AbstractRepository");
 
 class PostRepository extends AbstractRepository {
   constructor() {
-    // Appel du constructeur de la classe parente (AbstractRepository)
-    // avec le nom de la table "posts"
     super({ table: "posts" });
   }
 
   // C de CRUD - Créer un nouvel article
   async create(post) {
     const [result] = await this.database.query(
-      `INSERT INTO ${this.table} (title, content, author, imageUrl, created_at) VALUES (?, ?, ?, ?, NOW())`,
+      `INSERT INTO ${this.table} (title, content, author, imageUrl, createdAt) VALUES (?, ?, ?, ?, NOW())`,
       [post.title, post.content, post.author, post.imageUrl]
     );
 
-    // Retourner l'ID de l'article nouvellement créé
     return result.insertId;
   }
 
@@ -25,7 +22,6 @@ class PostRepository extends AbstractRepository {
       [id]
     );
 
-    // Retourner le premier article trouvé
     return rows[0];
   }
 
@@ -33,14 +29,12 @@ class PostRepository extends AbstractRepository {
   async readAll() {
     const [rows] = await this.database.query(`SELECT * FROM ${this.table}`);
 
-    // Retourner tous les articles
     return rows;
   }
 
   // U de CRUD - Mettre à jour un article existant
-  // U de CRUD - Mettre à jour un article existant
+
   async update(post) {
-    // Tableau pour stocker les parties de la requête SET et les valeurs
     const fields = [];
     const values = [];
 
@@ -58,23 +52,29 @@ class PostRepository extends AbstractRepository {
       values.push(post.author);
     }
     if (post.imageUrl) {
-      fields.push("image_url = ?");
+      fields.push("imageUrl = ?");
       values.push(post.imageUrl);
     }
 
     // Ajoute toujours la mise à jour de la date
-    fields.push("updated_at = NOW()");
+    fields.push("updatedAt = NOW()");
 
-    // Construit la requête dynamique en joignant les champs avec des virgules
     const query = `UPDATE ${this.table} SET ${fields.join(", ")} WHERE id = ?`;
 
-    // Ajoute l'ID à la fin des valeurs
     values.push(post.id);
 
-    // Exécuter la requête SQL
     const [result] = await this.database.query(query, values);
 
-    // Retourner le nombre de lignes affectées (1 si la mise à jour a réussi)
+    return result.affectedRows;
+  }
+
+  // D de CRUD - Supprimer un article
+  async delete(id) {
+    const [result] = await this.database.query(
+      `DELETE FROM ${this.table} WHERE id = ?`,
+      [id]
+    );
+
     return result.affectedRows;
   }
 }

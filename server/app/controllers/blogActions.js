@@ -4,13 +4,16 @@ const postRepo = new BlogPostRepository();
 
 // Créer un nouvel article de blog
 const create = async (req, res) => {
-  const { title, content, author, imageUrl } = req.body;
+  const { title, content, author } = req.body;
+  // Récupérer l'image téléchargée via Multer
+  const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
+
   try {
     const newPostId = await postRepo.create({
       title,
       content,
       author,
-      imageUrl,
+      imageUrl, // Utilisation de l'URL de l'image
     });
     return res.status(201).json({ id: newPostId });
   } catch (error) {
@@ -54,14 +57,19 @@ const browse = async (req, res) => {
 // Mettre à jour un article de blog existant
 const update = async (req, res) => {
   const { id } = req.params;
-  const { title, content, author, imageUrl } = req.body;
+  const { title, content, author } = req.body;
+  // Récupérer l'image téléchargée via Multer, sinon conserver l'ancienne
+  const imageUrl = req.file
+    ? `/uploads/${req.file.filename}`
+    : req.body.imageUrl;
+
   try {
     const affectedRows = await postRepo.update({
       id,
       title,
       content,
       author,
-      imageUrl,
+      imageUrl, // Utilisation de l'URL de l'image
     });
     if (affectedRows === 0) {
       return res.status(404).json({ message: "Article non trouvé" });
