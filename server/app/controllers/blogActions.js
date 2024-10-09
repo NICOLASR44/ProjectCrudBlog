@@ -1,12 +1,13 @@
 const BlogPostRepository = require("../../database/models/BlogPostRepository");
 
 const postRepo = new BlogPostRepository();
+const BASE_URL = "http://localhost:3310";
 
 // Créer un nouvel article de blog
 const create = async (req, res) => {
   const { title, content, author } = req.body;
   // Récupérer l'image téléchargée via Multer
-  const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
+  const imageUrl = req.file ? `${BASE_URL}/uploads/${req.file.filename}` : "";
 
   try {
     const newPostId = await postRepo.create({
@@ -60,7 +61,7 @@ const update = async (req, res) => {
   const { title, content, author } = req.body;
   // Récupérer l'image téléchargée via Multer, sinon conserver l'ancienne
   const imageUrl = req.file
-    ? `/uploads/${req.file.filename}`
+    ? `${BASE_URL}/uploads/${req.file.filename}`
     : req.body.imageUrl;
 
   try {
