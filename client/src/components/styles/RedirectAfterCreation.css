@@ -1,0 +1,75 @@
+/* Styles pour la page de redirection */
+.redirect-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  background-image: url(../../assets/images/BackgroudRedirection.jpg);
+  background-size: cover;
+  font-family: "Arial", sans-serif;
+  position: relative; /* Position relative pour contenir l'animation */
+  overflow: hidden; /* Empêche les débordements */
+}
+
+.redirect-message h1 {
+  font-size: 2.5rem;
+  color: var(--clr-white);
+  margin-bottom: 1rem;
+  animation: fadeIn 1.5s ease-in-out;
+  position: absolute;
+  top: 4rem;
+}
+
+.redirect-message p {
+  font-size: 1.2rem;
+  color: var(--clr-white);
+  animation: fadeIn 2s ease-in-out;
+  position: absolute;
+  top: 7.5rem;
+}
+
+/* Animation pour une entrée en fondu */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Style du texte avec ombre */
+.redirect-message h1,
+.redirect-message p {
+  opacity: 0;
+  animation-fill-mode: forwards;
+  text-shadow: 2px 4px 6px rgb(255, 255, 255);
+}
+/* Style pour l'image de la sorcière */
+.redirect-page-witch img {
+  position: fixed;
+  top: 20%;
+  left: 15%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: 291px;
+  height: auto;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Animation de va-et-vient */
+@keyframes float {
+  0% {
+    transform: translate(-50%, 0); /* Position de départ */
+  }
+  50% {
+    transform: translate(-50%, 20px); /* Position plus basse */
+  }
+  100% {
+    transform: translate(-50%, 0); /* Retour à la position de départ */
+  }
+}

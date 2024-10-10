@@ -1,0 +1,52 @@
+.footer {
+  background-color: #333;
+  color: #ee971e; /* Couleur orange pour tout le texte */
+  padding: 20px 0;
+  text-align: center;
+}
+
+.footer__content {
+  display: flex;
+  justify-content: space-between; /* Espacement horizontal entre les sections */
+  align-items: center; /* Centrer verticalement */
+  flex-wrap: wrap; /* Permet de passer à la ligne si l'espace est limité */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.footer__links a {
+  color: #ee971e; /* Couleur orange pour les liens */
+  margin: 0 15px;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.footer__links a:hover {
+  text-decoration: underline;
+}
+
+.footer__social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer__social a {
+  margin: 0 10px;
+  color: #ee971e; /* Couleur orange pour les icônes */
+  transition: transform 0.3s ease;
+}
+
+.footer__social a:hover {
+  transform: scale(1.2);
+  color: #f39c12; /* Couleur de survol pour un effet sympa */
+}
+
+.footer__bottom {
+  color: #ee971e; /* Couleur orange pour le texte de bas de page */
+  font-size: 0.9rem;
+  flex-basis: 100%; /* Prend toute la largeur disponible */
+  text-align: center;
+  margin-top: 10px;
+}
