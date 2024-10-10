@@ -5,9 +5,11 @@ const BASE_URL = "http://localhost:3310";
 
 // Créer un nouvel article de blog
 const create = async (req, res) => {
-  const { title, content, author } = req.body;
-  // Récupérer l'image téléchargée via Multer
-  const imageUrl = req.file ? `${BASE_URL}/uploads/${req.file.filename}` : "";
+  const { title, content, author, imageUrl: formImageUrl } = req.body;
+  // Utiliser l'image téléchargée via Multer, sinon l'URL envoyée via le formulaire
+  const imageUrl = req.file
+    ? `${BASE_URL}/uploads/${req.file.filename}`
+    : formImageUrl;
 
   try {
     const newPostId = await postRepo.create({
