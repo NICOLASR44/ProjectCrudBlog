@@ -19,3 +19,8 @@
   margin-bottom: 1rem;
   font-size: 1.5rem;
 }
+
+.home__pumpkin img {
+  width: 150px; /* Taille de la citrouille */
+  pointer-events: none; /* Empêche que l'image bloque les clics de la souris */
+}
