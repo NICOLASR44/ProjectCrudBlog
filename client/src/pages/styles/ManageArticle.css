@@ -114,3 +114,41 @@ input[readonly] {
   background-color: var(--clr-orange);
   color: var(--clr-black);
 }
+
+.branch-left,
+.branch-right {
+  position: fixed;
+  top: 35rem;
+  width: 400px; /* Ajuste la largeur selon tes besoins */
+  height: auto;
+  z-index: -1;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.branch-left {
+  left: 13rem;
+  /* transform: translateX(0); */
+}
+
+.branch-right {
+  right: 13rem;
+  /* transform: translateX(0); */
+}
+
+.parallax {
+  position: relative;
+}
+
+.parallax img {
+  object-fit: cover;
+}
+
+@keyframes parallaxEffect {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100px);
+  }
+}

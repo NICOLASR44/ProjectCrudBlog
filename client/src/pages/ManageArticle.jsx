@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import "./styles/ManageArticle.css";
 import Footer from "../components/Footer";
+import branchLeft from "../assets/images/branchLeft.png";
+import branchRight from "../assets/images/branchRight.png";
 
 function ManageArticle() {
   const { id } = useParams();
@@ -95,10 +97,34 @@ function ManageArticle() {
         .catch((error) => console.error("Error deleting article:", error));
     }
   };
+  // Effet parallax pour les branches
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const branchLeftImg = document.querySelector(".branch-left");
+      const branchRightImg = document.querySelector(".branch-right");
+
+      if (branchLeftImg && branchRightImg) {
+        branchLeftImg.style.transform = `translateX(-${scrollPosition * 0.5}px) translateY(-50%)`; // Déplacement horizontal de droite à gauche
+        branchRightImg.style.transform = `translateX(${scrollPosition * 0.5}px) translateY(-50%)`; // Déplacement horizontal de gauche à droite
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <>
+      <div className="parallax">
+        <img src={branchLeft} alt="Left Branch" className="branch-left" />
+        <img src={branchRight} alt="Right Branch" className="branch-right" />
+      </div>
       <Navbar />
+
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="title">Title:</label>

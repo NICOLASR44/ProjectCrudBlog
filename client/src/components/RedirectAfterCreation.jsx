@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./styles/RedirectAfterCreation.css";
+import Witch from "../assets/images/witch.png";
 
 function RedirectAfterCreation() {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ function RedirectAfterCreation() {
     // Redirect to the homepage after 5 seconds
     const timer = setTimeout(() => {
       navigate("/"); // Redirect to the homepage or desired page
-    }, 7000); // 5000ms = 5 seconds
+    }, 7000); // 5000ms = 7 seconds
 
     return () => clearTimeout(timer); // Cleanup the timer on component unmount
   }, [navigate]);
@@ -32,11 +33,9 @@ function RedirectAfterCreation() {
 
   return (
     <div className="redirect-page">
-      <img src="src\assets\images\pumpkins.jpg" alt="pumpkins" />
-      <div className="pumpkin-animation">
-        <img src="/images/pumpkin.png" alt="Pumpkin" />
+      <div className="redirect-page-witch">
+        <img src={Witch} alt="witch" />
       </div>
-
       <div className="redirect-message">
         <h1>{getMessage()}</h1>
         <p>
