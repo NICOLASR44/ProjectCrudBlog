@@ -8,8 +8,8 @@ Ce projet est une application web interactive construite avec **React** qui perm
 
 ## Aperçu
 
-![Aperçu de la page Home](client\src\assets\images\form capture.png)
-![Aperçu de la page Articles](client\src\assets\images\form capture.png)
+![Aperçu de la page Home](https://github.com/NICOLASR44/ProjectCrudBlog/blob/dev/client/src/assets/images/home%20capture.png?raw=true)
+![Aperçu de la page Articles](https://github.com/NICOLASR44/ProjectCrudBlog/blob/dev/client/src/assets/images/form%20capture.png?raw=true)
 
 ## Fonctionnalités
 
