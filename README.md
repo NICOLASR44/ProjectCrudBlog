@@ -6,6 +6,11 @@
 
 Ce projet est une application web interactive construite avec **React** qui permet de gérer des articles de blog (CRUD) tout en intégrant des animations interactives telles qu'une citrouille qui suit la souris et un effet parallax lors du défilement de la page.
 
+## Aperçu
+
+![Aperçu de la page Home](client\src\assets\images\form capture.png)
+![Aperçu de la page Articles](client\src\assets\images\form capture.png)
+
 ## Fonctionnalités
 
 - **Gestion des articles** : Créer, lire, mettre à jour et supprimer des articles via une interface utilisateur intuitive.
