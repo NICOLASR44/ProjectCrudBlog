@@ -51,8 +51,11 @@ function ManageArticle() {
     formData.append("title", article.title);
     formData.append("content", article.content);
     formData.append("author", article.author);
+
     if (imageFile) {
       formData.append("imageFile", imageFile);
+    } else if (article.imageUrl) {
+      formData.append("imageUrl", article.imageUrl);
     }
 
     const method = id ? "PUT" : "POST";
