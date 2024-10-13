@@ -14,6 +14,7 @@
 }
 
 .article-card__image {
+  margin-top: 2rem;
   width: 100%;
   height: 250px;
   object-fit: cover;

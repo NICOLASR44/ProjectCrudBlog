@@ -1,0 +1,33 @@
+body {
+  font-family: "Arial", sans-serif;
+  background-color: var(--clr-black);
+  color: var(--clr-orange);
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+header {
+  background-color: var(--clr-orange);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: var(--clr-black);
+  margin: 0;
+}
+
+/* Section à propos */
+.about-section {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: var(--clr-black);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: var(--clr-orange);
+  font-size: 1.2rem;
+  line-height: 1.8;
+}

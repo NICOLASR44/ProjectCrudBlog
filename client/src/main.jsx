@@ -8,6 +8,8 @@ import Home from "./pages/Home";
 import ManageArticle from "./pages/ManageArticle";
 import RedirectAfterCreation from "./components/RedirectAfterCreation";
 import ViewArticle from "./pages/ViewArticle";
+import ContactPage from "./pages/ContactPage";
+import AboutPage from "./pages/AboutPage";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,14 @@ const router = createBrowserRouter([
   {
     path: "/article/:id",
     element: <ViewArticle />,
+  },
+  {
+    path: "/contact",
+    element: <ContactPage />,
+  },
+  {
+    path: "/about",
+    element: <AboutPage />,
   },
 ]);
 

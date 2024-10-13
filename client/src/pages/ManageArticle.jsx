@@ -5,6 +5,7 @@ import "./styles/ManageArticle.css";
 import Footer from "../components/Footer";
 import branchLeft from "../assets/images/branchLeft.png";
 import branchRight from "../assets/images/branchRight.png";
+import DeleteConfirmationModal from "../components/DeleteConfirmationModal"; // Importation de la modal
 
 function ManageArticle() {
   const { id } = useParams();
@@ -20,6 +21,7 @@ function ManageArticle() {
   });
 
   const [imageFile, setImageFile] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false); // État pour gérer l'ouverture de la modal
 
   useEffect(() => {
     if (id) {
@@ -46,6 +48,11 @@ function ManageArticle() {
     }
   };
 
+  const handleRemoveImage = () => {
+    setImageFile(null); // Réinitialiser le fichier d'image sélectionné
+    setArticle({ ...article, imageUrl: "" }); // Réinitialiser l'URL de l'image dans l'article
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -70,8 +77,7 @@ function ManageArticle() {
       body: formData,
     })
       .then((response) => response.json())
-      .then((data) => {
-        console.log(id ? "Article updated:" : "Article created:", data);
+      .then(() => {
         navigate("/redirect", {
           state: { action: id ? "updated" : "created" }, // Passer l'état
         });
@@ -79,24 +85,31 @@ function ManageArticle() {
       .catch((error) => console.error("Error saving article:", error));
   };
 
-  const handleDelete = () => {
-    if (window.confirm("Are you sure you want to delete this article?")) {
-      fetch(`http://localhost:3310/api/blog/${id}`, {
-        method: "DELETE",
-      })
-        .then((response) => {
-          if (response.ok) {
-            console.log("Article deleted");
-            navigate("/redirect", {
-              state: { action: "deleted" }, // Passer l'état
-            });
-          } else {
-            console.error("Error deleting article");
-          }
-        })
-        .catch((error) => console.error("Error deleting article:", error));
-    }
+  const handleDeleteClick = () => {
+    setIsModalOpen(true); // Ouvre la modal
   };
+
+  const handleConfirmDelete = () => {
+    setIsModalOpen(false); // Ferme la modal
+    fetch(`http://localhost:3310/api/blog/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (response.ok) {
+          navigate("/redirect", {
+            state: { action: "deleted" }, // Passer l'état
+          });
+        } else {
+          console.error("Error deleting article");
+        }
+      })
+      .catch((error) => console.error("Error deleting article:", error));
+  };
+
+  const handleCancelDelete = () => {
+    setIsModalOpen(false); // Ferme la modal si l'utilisateur annule
+  };
+
   // Effet parallax pour les branches
   useEffect(() => {
     const handleScroll = () => {
@@ -156,25 +169,38 @@ function ManageArticle() {
             onChange={handleChange}
           />
         </div>
-        <div>
-          <label htmlFor="imageFile">Upload Image:</label>
-          <input
-            type="file"
-            id="imageFile"
-            name="imageFile"
-            accept="image/*"
-            onChange={handleImageChange}
-          />
-        </div>
-        {article.imageUrl && (
+        <div className="center-container">
           <div>
-            <img
-              src={article.imageUrl}
-              alt="Article Preview"
-              style={{ width: "200px", height: "auto", marginTop: "10px" }}
+            <label htmlFor="imageFile" className="custom-upload-button">
+              Choose a file
+            </label>
+            <input
+              type="file"
+              id="imageFile"
+              name="imageFile"
+              accept="image/*"
+              className="upload__input"
+              onChange={handleImageChange}
             />
           </div>
-        )}
+          {article.imageUrl && (
+            <div className="image-container">
+              <img
+                style={{ width: "200px", height: "auto", marginTop: "10px" }}
+                src={article.imageUrl}
+                alt="Article Preview"
+                className="image-preview"
+              />
+              <button
+                type="button"
+                className="remove-image-button"
+                onClick={handleRemoveImage}
+              >
+                &times;
+              </button>
+            </div>
+          )}
+        </div>
         <div>
           <label htmlFor="content">Content:</label>
           <textarea
@@ -191,13 +217,12 @@ function ManageArticle() {
           <>
             <button
               type="button"
-              onClick={handleDelete}
+              onClick={handleDeleteClick} // Ouvre la modal
               className="delete-button"
             >
               Delete
             </button>
 
-            {/* Bouton pour voir l'article */}
             <button
               type="button"
               onClick={() => navigate(`/article/${id}`)} // Redirige vers la page de visualisation
@@ -208,9 +233,15 @@ function ManageArticle() {
           </>
         )}
       </form>
-      <div className="managearticle__footer">
-        <Footer />
-      </div>
+
+      {/* Modal de confirmation de suppression */}
+      <DeleteConfirmationModal
+        isOpen={isModalOpen}
+        onConfirm={handleConfirmDelete}
+        onCancel={handleCancelDelete}
+      />
+
+      <Footer />
     </>
   );
 }

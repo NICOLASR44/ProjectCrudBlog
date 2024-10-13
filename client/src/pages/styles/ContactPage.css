@@ -1,0 +1,81 @@
+/* Style pour la page de contact */
+
+/* Général */
+body {
+  font-family: "Arial", sans-serif;
+  background-color: var(--clr-black);
+  color: var(--clr-orange);
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+header {
+  background-color: var(--clr-orange);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: var(--clr-black);
+  margin: 0;
+}
+
+/* Section formulaire */
+.contact-form-section {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: var(--clr-black);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Formulaire */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: block;
+  color: var(--clr-orange);
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+  background-color: var(--clr-black);
+  color: var(--clr-orange);
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--clr-orange);
+  color: var(--clr-black);
+  border: 1px solid var(--clr-orange);
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--clr-black);
+  color: var(--clr-orange);
+}
