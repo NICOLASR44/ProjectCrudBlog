@@ -31,3 +31,40 @@ h1 {
   font-size: 1.2rem;
   line-height: 1.8;
 }
+
+.pumpkin-container {
+  text-align: center;
+  background-color: var(--clr-black);
+  padding-bottom: 50px;
+  position: relative;
+
+  p {
+    font-size: 2rem;
+    margin-bottom: -4rem;
+    margin-top: 3rem;
+  }
+}
+
+.pumpkin-area {
+  position: relative;
+  width: 800px;
+  height: 600px;
+  margin: 0 auto;
+  border: 1px solid transparent;
+  display: inline-block;
+}
+
+.pumpkin {
+  position: absolute;
+  width: 285px;
+  height: auto;
+  top: 200px;
+  left: 242px;
+}
+
+.draggable-item {
+  position: absolute;
+  z-index: 5;
+  cursor: move;
+  width: 100px; /* Ajuste la taille des éléments si nécessaire */
+}
