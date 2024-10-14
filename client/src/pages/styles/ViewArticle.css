@@ -21,15 +21,15 @@
 }
 
 .view-article-image {
-  width: 50%;
+  width: 30%;
   height: auto;
 
-  margin-left: 13rem;
-  margin-bottom: 4rem;
-  margin-top: 4rem;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
 }
 
 .view-article-content {
   font-size: 1.1rem;
   line-height: 1.6;
+  color: var(--clr-black);
 }
