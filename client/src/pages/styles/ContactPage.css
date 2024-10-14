@@ -36,6 +36,7 @@ h1 {
 .contact-form {
   display: flex;
   flex-direction: column;
+  align-content: center;
 }
 
 .form-group {
@@ -78,4 +79,97 @@ button {
 button:hover {
   background-color: var(--clr-black);
   color: var(--clr-orange);
+}
+
+.contact__main {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.contact-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.castel {
+  position: relative;
+  overflow: hidden;
+  border: 5px solid var(--clr-orange);
+  border-radius: 10px;
+  margin-top: 3rem;
+}
+
+.castel img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.brume {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300%; /* Plus large pour éviter de voir le bord gauche */
+  height: 100%;
+  background: url("../assets/images/brume.png") repeat-x; /* Répéter l'image de brume horizontalement */
+  background-size: cover;
+  opacity: 0.5;
+  animation: subtleBrumeMove 30s ease-in-out infinite; /* Ralentir l'animation */
+  pointer-events: none;
+}
+
+@keyframes subtleBrumeMove {
+  0% {
+    transform: translateX(-20%); /* Déplacement légèrement à gauche */
+  }
+  50% {
+    transform: translateX(20%); /* Déplacement légèrement à droite */
+  }
+  100% {
+    transform: translateX(-20%); /* Retour à gauche */
+  }
+}
+.reverse-brume {
+  position: absolute;
+  top: 0;
+  left: -12rem;
+  width: 300%; /* Plus large pour éviter de voir le bord gauche */
+  height: 100%;
+  background: url("../assets/images/brumeInverse.png") repeat-x; /* Répéter l'image de brume horizontalement */
+  background-size: cover;
+  opacity: 0.5;
+  animation: subtleBrumeMove 30s ease-in-out infinite; /* Ralentir l'animation */
+  pointer-events: none;
+  animation: reverseBrumeMove 30s ease-in-out infinite; /* Animation de la brume inversée */
+}
+
+@keyframes reverseBrumeMove {
+  0% {
+    transform: translateX(10%); /* Départ à droite */
+  }
+  50% {
+    transform: translateX(-10%); /* Se déplace vers la gauche */
+  }
+  100% {
+    transform: translateX(10%); /* Retour à droite */
+  }
+}
+
+.contact-form-section {
+  flex: 1;
+  max-width: 800px;
+  margin-left: 10rem;
 }

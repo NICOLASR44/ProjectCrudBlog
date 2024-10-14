@@ -107,7 +107,7 @@ function ManageArticle() {
   };
 
   const handleCancelDelete = () => {
-    setIsModalOpen(false); // Ferme la modal si l'utilisateur annule
+    setIsModalOpen(false);
   };
 
   // Effet parallax pour les branches
@@ -118,8 +118,8 @@ function ManageArticle() {
       const branchRightImg = document.querySelector(".branch-right");
 
       if (branchLeftImg && branchRightImg) {
-        branchLeftImg.style.transform = `translateX(-${scrollPosition * 0.5}px) translateY(-50%)`; // Déplacement horizontal de droite à gauche
-        branchRightImg.style.transform = `translateX(${scrollPosition * 0.5}px) translateY(-50%)`; // Déplacement horizontal de gauche à droite
+        branchLeftImg.style.transform = `translateX(-${scrollPosition * 0.5}px) translateY(-50%)`;
+        branchRightImg.style.transform = `translateX(${scrollPosition * 0.5}px) translateY(-50%)`;
       }
     };
 

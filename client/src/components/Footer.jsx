@@ -47,7 +47,7 @@ function Footer() {
         {/* Footer bottom moved into footer content */}
         <div className="footer__bottom">
           <p>
-            &copy; {new Date().getFullYear()} Your Company. All rights reserved.
+            &copy; {new Date().getFullYear()} Nr Company. All rights reserved.
           </p>
         </div>
       </div>
